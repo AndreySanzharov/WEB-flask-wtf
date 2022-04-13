@@ -1,17 +1,13 @@
-from flask import Flask
-from flask import url_for
-from flask import render_template
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
-@app.route('/index')
-def index():
-    param = {}
-    param['zagolowok'] = "Миссия Колонизация Марса"
-    param['title'] = 'Заготовка'
-    return render_template('base.html', **param)
+@app.route('/index/<title>')
+@app.route('/<title>')
+def index(title):
+    return render_template('base.html', title=title,)
 
 
-if __name__ == "__main__":
-    app.run(port=8000, host='127.0.0.1')
+if __name__ == '__main__':
+    app.run(port=8080, host='127.0.0.1')
